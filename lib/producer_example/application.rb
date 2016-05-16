@@ -12,16 +12,24 @@ module ProducerExample
     end
 
     get "/resource/:id" do
-      resource = @resources.find { |resource| resource.id == params["id"] }
-      halt 404 unless resource
-      halt 200, { "Content-Type" => "application/json" }, resource.to_json
+      found_resource = @resources.find { |resource| resource.id == params["id"] }
+      halt 404 unless found_resource
+      halt 200, { "Content-Type" => "application/json" }, found_resource.to_json
     end
 
     post "/resource" do
-      resource = ProducerExample::Resource.from_json(request.body.read) rescue nil
+      resource = parse_resource
       halt 400 unless resource
       @resources << resource
       halt 204
+    end
+
+    private
+
+    def parse_resource
+      ProducerExample::Resource.from_json(request.body.read)
+    rescue
+      nil
     end
 
   end

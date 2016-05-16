@@ -1,17 +1,27 @@
 require 'bundler'
 Bundler.require(:default, :development)
 
+require 'rubocop/rake_task'
 require 'rspec/core/rake_task'
 require 'http_server_manager/rake/task_generators'
 
 require_relative 'lib/producer_example/server'
 
-desc "Removed generated artefacts"
+desc "Removes generated artefacts"
 task :clobber do
   %w{ pkg tmp }.each { |dir| rm_rf dir }
   rm Dir.glob("**/coverage.data"), force: true
   puts "Clobbered"
 end
+
+namespace :metrics do
+
+  RuboCop::RakeTask.new(:rubocop) { |task| task.fail_on_error = true }
+
+end
+
+desc "Performs source code metrics analysis"
+task metrics: "metrics:rubocop"
 
 desc "Exercises specifications"
 ::RSpec::Core::RakeTask.new(:spec)
@@ -55,6 +65,6 @@ task :validate do
   raise "Travis CI validation failed" unless $?.success?
 end
 
-task :default => %w{ clobber coverage }
+task :default => %w{ clobber metrics coverage }
 
-task :pre_commit => %w{ clobber coverage:show validate }
+task :pre_commit => %w{ clobber metrics coverage:show validate }

@@ -5,7 +5,9 @@ module ProducerExample
     attr_reader :id, :name
 
     def self.from_json(payload)
-      self.new(JSON.parse(payload).symbolize_keys) rescue nil
+      self.new(JSON.parse(payload).symbolize_keys)
+    rescue
+      nil
     end
 
     def initialize(id:, name:)

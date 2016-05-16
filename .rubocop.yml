@@ -1,0 +1,28 @@
+AllCops:
+  Exclude:
+    - Rakefile
+    - spec/**/*.rb
+  TargetRubyVersion: 2.1
+
+# double quotes preferred, except in require
+Style/StringLiterals:
+  Enabled: false
+
+# aids readability
+Style/RedundantSelf:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+# empty lines aid readability
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+
+# empty lines aid readability
+Style/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+# self-documentation preferred
+Style/Documentation:
+  Enabled: false

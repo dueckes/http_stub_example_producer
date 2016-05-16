@@ -8,6 +8,7 @@ gem 'activesupport',       '~> 4.2'
 gem 'http_server_manager', '~> 0.4'
 
 group :development do
+  gem 'rubocop',                   '~> 0.40', require: false
   gem 'rspec',                     '~> 3.4'
   gem 'faker',                     '~> 1.6'
   gem 'httparty',                  '~> 0.13'

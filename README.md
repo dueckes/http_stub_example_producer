@@ -1,19 +1,19 @@
-http_stub_producer_example
+http_stub_example_producer
 --------------------------
 
-An example of the producer side of verifying contracts via [http_stub](https://github.com/MYOB-Technology/http_stub).
+An example of a producer service that verifies HTTP API contracts via [http_stub](https://github.com/MYOB-Technology/http_stub)
 
 ### Status
-[![Build Status](https://travis-ci.org/MYOB-Technology/http_stub_producer_example.png)](https://travis-ci.org/MYOB-Technology/http_stub_producer_example)
-[![Code Climate](https://codeclimate.com/github/MYOB-Technology/http_stub_producer_example/badges/gpa.svg)](https://codeclimate.com/github/MYOB-Technology/http_stub_producer_example)
-[![Test Coverage](https://codeclimate.com/github/MYOB-Technology/http_stub_producer_example/badges/coverage.svg)](https://codeclimate.com/github/MYOB-Technology/http_stub_producer_example/coverage)
-[![Dependency Status](https://gemnasium.com/MYOB-Technology/http_stub_producer_example.png)](https://gemnasium.com/MYOB-Technology/http_stub_producer_example)
+[![Build Status](https://travis-ci.org/MYOB-Technology/http_stub_example_producer.png)](https://travis-ci.org/MYOB-Technology/http_stub_example_producer)
+[![Code Climate](https://codeclimate.com/github/MYOB-Technology/http_stub_example_producer/badges/gpa.svg)](https://codeclimate.com/github/MYOB-Technology/http_stub_example_producer)
+[![Test Coverage](https://codeclimate.com/github/MYOB-Technology/http_stub_example_producer/badges/coverage.svg)](https://codeclimate.com/github/MYOB-Technology/http_stub_example_producer/coverage)
+[![Dependency Status](https://gemnasium.com/MYOB-Technology/http_stub_example_producer.png)](https://gemnasium.com/MYOB-Technology/http_stub_example_producer)
 
 ### Running the Producer
 - Install [Docker](https://www.docker.com/)
-- `docker build -t http_stub_producer_example .`
-- `docker run -d -p 3000:3000 http_stub_producer_example`
-- Producer is available on ```http://<docker-machine-ip>:3000```
+- `docker build -t http_stub_example_producer .`
+- `docker run -d -p 3000:3000 http_stub_example_producer`
+- Producer is available on ```http://localhost:3000```
 
 ### How do I experiment with it?
-Run terminal: `docker run -it -p 3000:3000 -v ~/work/http_stub_producer_example:/root/app http_stub_producer_example /bin/sh`
+Run terminal: `docker run -it -p 3000:3000 -v ~/work/http_stub_example_producer:/root/app http_stub_example_producer /bin/sh`

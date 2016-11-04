@@ -1,7 +1,7 @@
-describe ProducerExample::Resource do
+describe HttpStubExampleProducer::Resource do
 
-  let(:id)      { SecureRandom.uuid }
-  let(:name)    { Faker::Name.name }
+  let(:id)   { SecureRandom.uuid }
+  let(:name) { Faker::Name.name }
 
   let(:resource) { described_class.new(name: name, id: id) }
 

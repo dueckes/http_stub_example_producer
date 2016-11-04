@@ -1,4 +1,4 @@
-module ProducerExample
+module HttpStubExampleProducer
 
   class Application < Sinatra::Base
 
@@ -27,7 +27,7 @@ module ProducerExample
     private
 
     def parse_resource
-      ProducerExample::Resource.from_json(request.body.read)
+      HttpStubExampleProducer::Resource.from_json(request.body.read)
     rescue
       nil
     end

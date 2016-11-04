@@ -1,25 +1,29 @@
 describe "Producer Example Stub contract verification" do
 
   let(:real_producer_base_uri) { "http://localhost:3000" }
-  let(:stub_producer_base_uri) { "http://localhost:3001" }
-  let(:producer_base_uris)     { [ real_producer_base_uri, stub_producer_base_uri ] }
+  let(:stub_producer_base_uri) { "http://localhost:5000" }
 
-  before(:example) { activate_scenario(scenario_name) }
+  before(:example) do
+    enable_stub_verification_mode
+    activate_scenario(scenario_name)
+  end
+
+  after(:example) { disable_stub_verification_mode }
 
   shared_examples_for "a Stub Scenario contract honoured by the Producer" do
 
-    subject { send_requests(request) }
+    subject { issue_verification_request(request) }
 
     it "matches the response from the Real Producer" do
-      responses = subject
+      response_differences = JSON.parse(subject.body)
 
-      expect(responses[0]).to eql(responses[1])
+      expect(response_differences).to eql([])
     end
 
-    def send_requests(options)
+    def issue_verification_request(options)
       http_options = {}
       http_options[:body] = options[:body] if options[:body]
-      producer_base_uris.map { |base_uri| HTTParty.send(options[:method], "#{base_uri}/#{options[:path]}", http_options) }
+      HTTParty.send(options[:method], "#{stub_producer_base_uri}/#{options[:path]}", http_options)
     end
 
   end
@@ -62,8 +66,16 @@ describe "Producer Example Stub contract verification" do
 
   end
 
+  def enable_stub_verification_mode
+    HTTParty.post("#{stub_producer_base_uri}/http_stub/config/mode", mode: :verify, producer_url: real_producer_base_uri)
+  end
+
+  def disable_stub_verification_mode
+    HTTParty.post("#{stub_producer_base_uri}/http_stub/config/mode", mode: :match)
+  end
+
   def activate_scenario(name)
-    HTTParty.post("http://localhost:3001/http_stub/scenarios/activate", name: name)
+    HTTParty.post("#{stub_producer_base_uri}/http_stub/scenarios/activate", name: name)
   end
 
 end

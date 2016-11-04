@@ -12,6 +12,6 @@ SimpleCov.start do
   refuse_coverage_drop
 end if ENV["coverage"]
 
-require_relative '../lib/producer_example'
+require_relative '../lib/http_stub_example_producer'
 
 RSpec.configure { |config| config.order = "random" }

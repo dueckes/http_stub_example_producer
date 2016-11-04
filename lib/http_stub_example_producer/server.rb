@@ -1,4 +1,4 @@
-module ProducerExample
+module HttpStubExampleProducer
 
   class Server < HttpServerManager::Server
 

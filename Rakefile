@@ -5,7 +5,10 @@ require 'rubocop/rake_task'
 require 'rspec/core/rake_task'
 require 'http_server_manager/rake/task_generators'
 
-require_relative 'lib/producer_example/server'
+HttpServerManager.pid_dir = File.expand_path('../tmp/pids', __FILE__)
+HttpServerManager.log_dir = File.expand_path('../tmp/logs', __FILE__)
+
+require_relative 'lib/http_stub_example_producer/server'
 
 desc "Removes generated artefacts"
 task :clobber do
@@ -23,8 +26,15 @@ end
 desc "Performs source code metrics analysis"
 task metrics: "metrics:rubocop"
 
-desc "Exercises specifications"
-::RSpec::Core::RakeTask.new(:spec)
+desc "Exercises unit tests"
+::RSpec::Core::RakeTask.new(:unit_test) do |task|
+  task.exclude_pattern = "spec/acceptance/**{,/*/**}/*_spec.rb"
+end
+
+desc "Exercises acceptance tests"
+::RSpec::Core::RakeTask.new(:acceptance_test) do |task|
+  task.pattern = "spec/acceptance/**{,/*/**}/*_spec.rb"
+end
 
 desc "Exercises specifications with coverage analysis"
 task :coverage => "coverage:generate"
@@ -34,7 +44,7 @@ namespace :coverage do
   desc "Generates specification coverage results"
   task :generate do
     ENV["coverage"] = "enabled"
-    Rake::Task[:spec].invoke
+    Rake::Task[:unit_test].invoke
   end
 
   desc "Shows specification coverage results in browser"
@@ -48,23 +58,45 @@ namespace :coverage do
 
 end
 
-HttpServerManager.pid_dir = File.expand_path('../tmp/pids', __FILE__)
-HttpServerManager.log_dir = File.expand_path('../tmp/logs', __FILE__)
-
 namespace :server do
 
-  HttpServerManager::Rake::ServerTasks.new(ProducerExample::Server.new)
+  HttpServerManager::Rake::ServerTasks.new(HttpStubExampleProducer::Server.new)
 
 end
 
-task :validate do
-  print " Travis CI Validation ".center(80, "*") + "\n"
-  result = `travis-lint #{::File.expand_path('../.travis.yml', __FILE__)}`
-  puts result
-  print "*" * 80+ "\n"
-  raise "Travis CI validation failed" unless $?.success?
+namespace :servers do
+
+  task :start do
+    sh "docker-compose up --build --force-recreate -d"
+  end
+
+  task :stop do
+    sh "docker-compose down"
+  end
+
 end
 
-task :default => %w{ clobber metrics coverage }
+desc "Exercises acceptance tests and manages dependencies"
+task acceptance: "servers:start" do
+  begin
+    Rake::Task["acceptance_test"].invoke
+  ensure
+    Rake::Task["servers:stop"].invoke
+  end
+end
 
-task :pre_commit => %w{ clobber metrics coverage:show validate }
+namespace :ci do
+
+  task :validate do
+    print " Travis CI Validation ".center(80, "*") + "\n"
+    result = `travis-lint #{::File.expand_path('../.travis.yml', __FILE__)}`
+    puts result
+    print "*" * 80+ "\n"
+    raise "Travis CI validation failed" unless $?.success?
+  end
+
+end
+
+task default: %w{ clobber metrics coverage acceptance }
+
+task pre_commit: %w{ clobber metrics coverage:show acceptance ci:validate }

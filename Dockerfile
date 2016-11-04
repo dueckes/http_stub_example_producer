@@ -1,5 +1,8 @@
 FROM ruby:2.3.1-alpine
 
+# Update Bundler
+RUN gem install bundler
+
 # Cache dependencies
 COPY ["Gemfile", "Gemfile.lock", "/tmp/cache/"]
 WORKDIR /tmp/cache

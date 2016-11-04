@@ -5,14 +5,14 @@ ruby '2.3.1'
 gem 'sinatra',             '~> 1.4'
 gem 'json',                '~> 1.8'
 gem 'activesupport',       '~> 4.2'
-gem 'http_server_manager', '~> 0.4'
+gem 'http_server_manager', '~> 0.5'
 
 group :development do
-  gem 'rubocop',                   '~> 0.40', require: false
-  gem 'rspec',                     '~> 3.4'
+  gem 'rubocop',                   '~> 0.45', require: false
+  gem 'rspec',                     '~> 3.5'
   gem 'faker',                     '~> 1.6'
-  gem 'httparty',                  '~> 0.13'
-  gem 'simplecov',                 '~> 0.11'
-  gem 'codeclimate-test-reporter', '~> 0.4'
+  gem 'httparty',                  '~> 0.14'
+  gem 'simplecov',                 '~> 0.12'
+  gem 'codeclimate-test-reporter', '~> 0.6'
   gem 'travis-lint',               '~> 2.0'
 end

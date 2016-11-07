@@ -1,12 +1,11 @@
 require 'bundler'
 Bundler.require(:development)
 
-CodeClimate::TestReporter.start
-
 SimpleCov.start do
   coverage_dir "tmp/coverage"
 
   add_filter "/spec/"
+  add_filter "/vendor/"
 
   minimum_coverage 100
   refuse_coverage_drop

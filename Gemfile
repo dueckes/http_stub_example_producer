@@ -14,6 +14,6 @@ group :development do
   gem 'httparty',                  '~> 0.14'
   gem 'rack-test',                 '~> 0.6'
   gem 'simplecov',                 '~> 0.12'
-  gem 'codeclimate-test-reporter', '~> 0.6'
+  gem 'codeclimate-test-reporter', '~> 1.0'
   gem 'travis-lint',               '~> 2.0'
 end

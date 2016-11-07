@@ -8,8 +8,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     ast (2.3.0)
-    codeclimate-test-reporter (0.6.0)
-      simplecov (>= 0.7.1, < 1.0.0)
+    codeclimate-test-reporter (1.0.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
     faker (1.6.6)
@@ -80,7 +79,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport (~> 4.2)
-  codeclimate-test-reporter (~> 0.6)
+  codeclimate-test-reporter (~> 1.0)
   faker (~> 1.6)
   http_server_manager (~> 0.5)
   httparty (~> 0.14)

@@ -24,6 +24,9 @@ Style/EmptyLinesAroundClassBody:
 Style/EmptyLinesAroundModuleBody:
   Enabled: false
 
+SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
 # self-documentation preferred
 Style/Documentation:
   Enabled: false

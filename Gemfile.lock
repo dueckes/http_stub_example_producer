@@ -30,6 +30,8 @@ GEM
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
+    rack-test (0.6.3)
+      rack (>= 1.0)
     rainbow (2.1.0)
     rake (11.3.0)
     rspec (3.5.0)
@@ -83,6 +85,7 @@ DEPENDENCIES
   http_server_manager (~> 0.5)
   httparty (~> 0.14)
   json (~> 1.8)
+  rack-test (~> 0.6)
   rspec (~> 3.5)
   rubocop (~> 0.45)
   simplecov (~> 0.12)

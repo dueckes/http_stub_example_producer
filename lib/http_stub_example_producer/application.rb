@@ -28,8 +28,6 @@ module HttpStubExampleProducer
 
     def parse_resource
       HttpStubExampleProducer::Resource.from_json(request.body.read)
-    rescue
-      nil
     end
 
   end

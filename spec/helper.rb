@@ -14,4 +14,6 @@ end if ENV["coverage"]
 
 require_relative '../lib/http_stub_example_producer'
 
+require_relative 'support/lib/http_stub_producer_example/resource_fixture'
+
 RSpec.configure { |config| config.order = "random" }

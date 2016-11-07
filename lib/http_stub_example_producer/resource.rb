@@ -15,6 +15,10 @@ module HttpStubExampleProducer
       @name = name
     end
 
+    def to_json(options=nil)
+      { id: @id, name: @name }.to_json(options)
+    end
+
   end
 
 end

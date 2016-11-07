@@ -12,6 +12,7 @@ group :development do
   gem 'rspec',                     '~> 3.5'
   gem 'faker',                     '~> 1.6'
   gem 'httparty',                  '~> 0.14'
+  gem 'rack-test',                 '~> 0.6'
   gem 'simplecov',                 '~> 0.12'
   gem 'codeclimate-test-reporter', '~> 0.6'
   gem 'travis-lint',               '~> 2.0'

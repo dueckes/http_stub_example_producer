@@ -1,4 +1,4 @@
-describe "Producer Example Stub contract verification" do
+describe "Example Producer Stub contract verification" do
 
   let(:real_producer_base_uri) { "http://localhost:3000" }
   let(:stub_producer_base_uri) { "http://localhost:5000" }
@@ -20,10 +20,10 @@ describe "Producer Example Stub contract verification" do
       expect(response_differences).to eql([])
     end
 
-    def issue_verification_request(options)
+    def issue_verification_request(request)
       http_options = {}
-      http_options[:body] = options[:body] if options[:body]
-      HTTParty.send(options[:method], "#{stub_producer_base_uri}/#{options[:path]}", http_options)
+      http_options[:body] = request[:body] if request[:body]
+      HTTParty.send(request[:method], "#{stub_producer_base_uri}/#{request[:path]}", http_options)
     end
 
   end

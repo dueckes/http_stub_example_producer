@@ -12,7 +12,7 @@ require_relative 'lib/http_stub_example_producer/server'
 
 desc "Removes generated artefacts"
 task :clobber do
-  %w{ pkg tmp }.each { |dir| rm_rf dir }
+  %w{ coverage pkg tmp }.each { |dir| rm_rf dir }
   rm Dir.glob("**/coverage.data"), force: true
   puts "Clobbered"
 end

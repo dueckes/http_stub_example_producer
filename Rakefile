@@ -45,6 +45,7 @@ namespace :coverage do
   task :generate do
     ENV["coverage"] = "enabled"
     Rake::Task[:unit_test].invoke
+    Rake::Task["codeclimate-test-report"].invoke if ENV["CODECLIMATE_REPO_TOKEN"]
   end
 
   desc "Shows specification coverage results in browser"
@@ -97,8 +98,6 @@ namespace :ci do
 
 end
 
-task commit: %w{ clobber metrics coverage }
+task default: %w{ clobber metrics coverage acceptance }
 
 task pre_commit: %w{ clobber metrics coverage:show acceptance ci:validate }
-
-task default: %w{ commit acceptance }

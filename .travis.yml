@@ -6,7 +6,6 @@ rvm:
 before_install:
   - gem install bundler
   - git clone https://github.com/MYOB-Technology/http_stub_example.git ../http_stub_example
-script: bundle exec commit codeclimate-test-reporter acceptance
 cache: bundler
 notifications:
   email:

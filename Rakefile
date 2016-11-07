@@ -97,6 +97,8 @@ namespace :ci do
 
 end
 
-task default: %w{ clobber metrics coverage acceptance }
+task commit: %w{ clobber metrics coverage }
 
 task pre_commit: %w{ clobber metrics coverage:show acceptance ci:validate }
+
+task default: %w{ commit acceptance }

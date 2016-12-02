@@ -67,11 +67,11 @@ describe "Example Producer Stub contract verification" do
   end
 
   def enable_stub_verification_mode
-    HTTParty.post("#{stub_producer_base_uri}/http_stub/config/mode", mode: :verify, producer_url: real_producer_base_uri)
+    HTTParty.post("#{stub_producer_base_uri}/http_stub/mode", mode: :verify, producer_url: real_producer_base_uri)
   end
 
   def disable_stub_verification_mode
-    HTTParty.post("#{stub_producer_base_uri}/http_stub/config/mode", mode: :match)
+    HTTParty.post("#{stub_producer_base_uri}/http_stub/mode", mode: :match)
   end
 
   def activate_scenario(name)

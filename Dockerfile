@@ -1,4 +1,4 @@
-FROM ruby:2.3.1-alpine
+FROM ruby:2.4.0-alpine
 
 # Update Bundler
 RUN gem install bundler
@@ -6,14 +6,14 @@ RUN gem install bundler
 # Cache dependencies
 COPY ["Gemfile", "Gemfile.lock", "/tmp/cache/"]
 WORKDIR /tmp/cache
-RUN bundle install && rm -rf /tmp/cache
+RUN bundle install --without development && rm -rf /tmp/cache
 
 # Copy code
 COPY . /root/app/
 WORKDIR /root/app
 
 # Registers bundle in working directory
-RUN bundle install
+RUN bundle install --without development
 
 # Expose server port
 EXPOSE 3000
